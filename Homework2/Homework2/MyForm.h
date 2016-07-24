@@ -118,27 +118,49 @@ namespace Homework2 {
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e)
 	{
+		int number;
+		using namespace System;
+		array<Int32, 2>^ twoDArray = gcnew array<Int32, 2>(8, 8);
+		readStringArrayFromFile(twoDArray, number);
+		
+
 		//create graphic object
 		Graphics^ g;
 		g = pictureBox1->CreateGraphics();
+		//Bitmap^ bmp = gcnew Bitmap(L"sparky.bmp");
+		Image^ img = Image::FromFile(L"sparky.bmp");
 		//create a pen
 		Pen^ pen = gcnew Pen(Color::Red);
 		//Create a 9*9 Board with each cell a size of 30
+	
 		int numOfCandR = 9;
-		int cellSize = 30;
+		int cellSize = 30; //L*W
+		
 		for (int i = 0; i <= numOfCandR; i++)
 		{
 			// Vertical lines
 			g->DrawLine(pen, i * cellSize, 0, i * cellSize, numOfCandR * cellSize);
-			// Horizontal lines
-			g->DrawLine(pen, 0, i * cellSize, numOfCandR * cellSize, i * cellSize);
+			
+			for (int j = 0; j <= numOfCandR; j++)
+			{
+				// Horizontal lines
+				g->DrawLine(pen, 0, j * cellSize, numOfCandR * cellSize, j * cellSize);
+				
+			}
+
+			}
+		for (int i = 0; i < 6; i++)
+		{
+			
+			g->DrawImage(img, twoDArray[i,0]*cellSize, twoDArray[i,1]*cellSize, cellSize, cellSize);
+		}
+		
+		
+	
+			
 		}
 
-		//Bitmap^ bmp = gcnew Bitmap(L"sparky.bmp");
-		//Drawing the image on the position 0,0 (up-left corner)
-		//g->DrawImage(bmp, 0, 0);
 
-
-	}
+			 
 };
 }
